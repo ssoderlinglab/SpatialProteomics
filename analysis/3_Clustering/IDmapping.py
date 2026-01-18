@@ -1,1 +1,0 @@
-/home/poojaparameswaran/Documents/UniprotIDmapping/IDmapping.py
