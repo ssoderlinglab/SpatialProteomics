@@ -16,3 +16,4 @@ ShinyGo/
 .DS_Store
 compare_MutvsWTfractions/WT_Mut_fractionPlotSWIP.ipynb
 .Rproj.user
+analysis/
