@@ -11,12 +11,11 @@ Each biological replicate is fractionated into seven cellular compartments, labe
 | Path | Purpose |
 | --- | --- |
 | `src/` | Primary analysis pipeline; subdirectories `1_`–`7_` mirror the processing stages (QC, normalization, clustering, module modeling, plotting, Shiny assets). |
-| `postprocess/` | WT vs MUT plotting notebooks, KEGG lookups, and publication-ready figure templates (formerly `compare_MutvsWTfractions/`). |
-| `data/`, `rawdata/`, `transformeddata/` | Representative input files, intermediate tidy tables, and transformed adjacency matrices. |
-| `tables/` | Aggregated Excel/CSV outputs (module memberships, MSstats results, enrichment summaries). |
-| `example_data/` | Lightweight datasets covering every pipeline stage; useful for smoke tests or training. |
-| `ShinyGo/`, `geneontologies/` | Gene-ontology helpers including ShinyGO automation notebooks and custom KEGG-based scripts. |
-| `rdata/`, `rdata.tar` | Serialized R objects for quick reuse across machines. |
+| `postprocess/` | WT vs MUT plotting notebooks, KEGG lookups, pathway enrichment helpers, and publication-ready figure templates (formerly `compare_MutvsWTfractions/`). |
+| `example_data/` | Lightweight datasets covering every pipeline stage; useful for smoke tests or onboarding. |
+| Root files (`README.md`, `.gitignore`, `DESCRIPTION`, `LICENSE`, `renv.lock`) | Project metadata and dependency pins. |
+
+Additional directories such as `data/`, `rawdata/`, `transformeddata/`, and `tables/` are created locally while running the pipeline and are not committed; populate them on your machine as needed.
 
 ## Example data
 
@@ -88,12 +87,11 @@ Scripts `00_generate-colors.R` through `10_plot-variance.R` produce publication-
 Choose the enrichment strategy that best matches your downstream analysis:
 
 1. **Scripted GSEA** – `src/4_Module-Analysis/2_module-GSEA.R`.
-2. **Automated ShinyGO scraping** – `ShinyGo/ShinyGO_analysis/module_pathways_1.ipynb` plus `cluster_analysis_2.py`.
-3. **Custom KEGG workflows** – `geneontologies/get_KEGGnums.ipynb` followed by `geneontologies/get_pathways.ipynb`, which emit CSVs to `enrichments_DIY/` and `enrichments_GSEA/`.
+2. **Custom KEGG/hypergeometric workflows** – `postprocess/get_KEGGnums.ipynb` followed by `postprocess/get_pathways.ipynb`, which emit CSVs wherever you specify.
 
 Recommended usage:
 
-1. Start from `{GENE}_TMT-Module-Results.xlsx` in `tables/`.
+1. Start from `{GENE}_TMT-Module-Results.xlsx` in your locally generated `tables/` directory.
 2. Supply module-to-gene mappings to the enrichment notebook or script of choice.
 3. Interpret modules with adjusted p-values ≤ 0.05 and feed significant results to the plotting notebooks in `postprocess/`.
 
